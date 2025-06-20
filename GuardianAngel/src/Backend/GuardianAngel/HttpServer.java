@@ -25,13 +25,14 @@ public class HttpServer {
             service.submit(new Requesthandler(client));
         }
     }
-    public void stop(){
-        running=false;
-        service.shutdown();
-        try{
+   public void stop() {
+    try {
+        if (socket != null) {
             socket.close();
-        }catch (IOException e){
-            System.out.println("Error Closing : "+e.getMessage());
         }
+    } catch (IOException e) {
+        System.err.println("Error Closing : " + e.getMessage());
     }
+}
+
 }

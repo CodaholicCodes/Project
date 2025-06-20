@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guardian Angel | Women Safety Platform</title>
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+    <link rel="stylesheet" href="style.css" />
+
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#8B5CF6",
+              secondary: "#EC4899",
+              dark: "#0F172A",
+              light: "#F8FAFC",
+            },
+            animation: {
+              "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-light dark:bg-dark">
+
+
+    <nav class="fixed top-0 left-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 shadow-md">
+      <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center">
+          <i class="fas fa-shield-alt text-primary text-2xl mr-2"></i>
+          <span class="text-xl font-bold text-primary">Guardian Angel</span>
+        </div>
+
+        
+
+        <div class="hidden md:flex space-x-8" id="desktop-menu">
+          <a href="#home" class="text-slate-700 dark:text-slate-200 hover:text-primary transition-colors">Home</a>
+          <a href="#sos" class="text-slate-700 dark:text-slate-200 hover:text-primary transition-colors">SOS</a>
+          <a href="#network" class="text-slate-700 dark:text-slate-200 hover:text-primary transition-colors">Safety Network</a>
+          <a href="#tracker" class="text-slate-700 dark:text-slate-200 hover:text-primary transition-colors">Live Tracker</a>
+          <a href="#routes" class="text-slate-700 dark:text-slate-200 hover:text-primary transition-colors">Safe Routes</a>
+          <a href="#resources" class="text-slate-700 dark:text-slate-200 hover:text-primary transition-colors">Resources</a>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <button id="theme-toggle" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle dark mode">
+            <i class="fas fa-moon dark:hidden"></i>
+            <i class="fas fa-sun hidden dark:block"></i>
+          </button>
+          <!-- Mobile Menu Button -->
+          <button id="mobile-menu-button" class="md:hidden text-slate-700 dark:text-slate-200" aria-label="Open menu">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+   
+      <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900">
+        <a href="#home" class="block py-2 px-4 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home</a>
+        <a href="#sos" class="block py-2 px-4 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">SOS</a>
+        <a href="#network" class="block py-2 px-4 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Safety Network</a>
+        <a href="#tracker" class="block py-2 px-4 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Live Tracker</a>
+        <a href="#routes" class="block py-2 px-4 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Safe Routes</a>
+        <a href="#resources" class="block py-2 px-4 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Resources</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="section min-h-screen flex items-center pt-20 md:pt-16">
+        <div class="container mx-auto px-4 py-20 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-slate-800 dark:text-white">Your <span class="text-primary">Digital Guardian</span> for Safety</h1>
+                <p class="text-lg text-slate-600 dark:text-slate-300 mb-8">Empowering women with real-time protection, emergency assistance, and community support at your fingertips.</p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                    <a href="#sos" class="bg-primary hover:bg-violet-700 text-white font-bold py-3 px-6 rounded-full transition-colors">Emergency SOS</a>
+                    <a href="#network" class="bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-bold py-3 px-6 rounded-full border border-slate-200 dark:border-slate-700 transition-colors">Build Safety Network</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80">
+                    <div class="absolute inset-0 bg-primary rounded-full flex items-center justify-center animate-pulse-slow">
+                        <i class="fas fa-shield-alt text-white text-7xl md:text-9xl"></i>
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-28 h-28 md:w-32 md:h-32 bg-secondary rounded-full -z-10"></div>
+                    <div class="absolute -bottom-4 -left-4 w-20 h-20 md:w-24 md:h-24 bg-amber-400 rounded-full -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SOS Section -->
+    <section id="sos" class="section py-20 bg-slate-50 dark:bg-slate-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-800 dark:text-white">Emergency <span class="text-primary">SOS</span> Assistance</h2>
+                <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">Instantly alert your safety network and emergency services with your precise location at the press of a button.</p>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <div class="relative mb-12">
+                    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl max-w-md w-full text-center">
+                        <h3 class="text-xl font-bold mb-4 text-slate-800 dark:text-white">Your Current Location</h3>
+                        <div class="bg-slate-100 dark:bg-slate-700 rounded-lg p-4 mb-6" aria-live="polite">
+                            <p class="text-slate-600 dark:text-slate-300">Latitude: <span id="latitude">Fetching...</span></p>
+                            <p class="text-slate-600 dark:text-slate-300">Longitude: <span id="longitude">Fetching...</span></p>
+                        </div>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Your location will be shared with your emergency contacts and logged for safety records.</p>
+                        <button id="sos-button" class="sos-btn bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded-full text-xl w-full transition-colors"><i class="fas fa-bell mr-2"></i> EMERGENCY SOS</button>
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-16 h-16 bg-amber-400 rounded-full flex items-center justify-center -z-10"><i class="fas fa-location-dot text-xl text-white"></i></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <!-- Feature Cards -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md text-center">
+                        <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center mb-4 mx-auto"><i class="fas fa-bolt text-primary text-xl"></i></div>
+                        <h3 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Instant Alert</h3>
+                        <p class="text-slate-600 dark:text-slate-300">Notify your emergency contacts instantly with one tap.</p>
+                    </div>
+                     <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md text-center">
+                        <div class="w-16 h-16 bg-pink-100 dark:bg-pink-900 rounded-full flex items-center justify-center mb-4 mx-auto"><i class="fas fa-map-marker-alt text-secondary text-xl"></i></div>
+                        <h3 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Live Location</h3>
+                        <p class="text-slate-600 dark:text-slate-300">Share your precise location in real-time with authorities.</p>
+                    </div>
+                     <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md text-center">
+                        <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mb-4 mx-auto"><i class="fas fa-headset text-primary text-xl"></i></div>
+                        <h3 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Emergency Support</h3>
+                        <p class="text-slate-600 dark:text-slate-300">Connect with local authorities and emergency services.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Network -->
+    <section id="network" class="section py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-800 dark:text-white">Your <span class="text-primary">Safety Network</span></h2>
+                <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">Build your trusted circle of contacts who will be alerted during emergencies.</p>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/3 bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-xl font-bold mb-6 text-slate-800 dark:text-white">Add Trusted Contact</h3>
+                    <div class="mb-4">
+                        <label for="contact-name" class="block text-slate-700 dark:text-slate-300 mb-2">Full Name</label>
+                        <input type="text" id="contact-name" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent" placeholder="Enter name"/>
+                    </div>
+                    <div class="mb-6">
+                        <label for="contact-phone" class="block text-slate-700 dark:text-slate-300 mb-2">Phone Number</label>
+                        <input type="text" id="contact-phone" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent" placeholder="Enter phone number"/>
+                    </div>
+                    <button id="add-contact" class="w-full bg-primary hover:bg-violet-700 text-white font-bold py-3 rounded-lg transition-colors"><i class="fas fa-plus-circle mr-2"></i> Add to Safety Network</button>
+                </div>
+                <div class="lg:w-2/3">
+                    <h3 class="text-xl font-bold mb-6 text-slate-800 dark:text-white">Your Trusted Contacts</h3>
+                    <div id="contacts-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Default/Dynamic Contacts -->
+                        <div class="contact-card bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md transition-all">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user-shield text-primary"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 dark:text-white">Police</h4>
+                                    <p class="text-slate-600 dark:text-slate-300">100</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-end">
+                                <button class="delete-contact-btn text-red-500 hover:text-red-700" aria-label="Delete contact"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="contact-card bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md transition-all">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-pink-100 dark:bg-pink-900 rounded-full flex items-center justify-center mr-4"><i class="fas fa-ambulance text-secondary"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 dark:text-white">Ambulance</h4>
+                                    <p class="text-slate-600 dark:text-slate-300">102</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-end">
+                                <button class="delete-contact-btn text-red-500 hover:text-red-700" aria-label="Delete contact"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Tracker -->
+    <section id="tracker" class="section py-20 bg-slate-50 dark:bg-slate-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-800 dark:text-white">Live Location <span class="text-primary">Tracker</span></h2>
+                <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">Share your live location with trusted contacts for real-time safety monitoring.</p>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-8 items-center">
+                <div class="lg:w-1/2">
+                    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl">
+                        <h3 class="text-xl font-bold mb-6 text-slate-800 dark:text-white">Share Your Location</h3>
+                        <div class="mb-6">
+                            <p class="text-slate-600 dark:text-slate-300 mb-4">Choose how long to share your live location:</p>
+                            <div class="flex gap-4 mb-6">
+                                <button class="duration-btn flex-1 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors" data-minutes="15">15 min</button>
+                                <button class="duration-btn flex-1 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors" data-minutes="30">30 min</button>
+                                <button class="duration-btn flex-1 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors" data-minutes="60">1 hour</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <label class="switch"><input type="checkbox" id="share-toggle"/><span class="slider round"></span></label>
+                            <span class="ml-3 text-slate-700 dark:text-slate-300">Share with all contacts</span>
+                        </div>
+                        <button id="start-tracking" class="w-full bg-primary hover:bg-violet-700 text-white font-bold py-3 rounded-lg transition-colors"><i class="fas fa-location-dot mr-2"></i> Start Sharing</button>
+                        <button id="stop-tracking" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-lg transition-colors mt-3 hidden"><i class="fas fa-stop-circle mr-2"></i> Stop Sharing</button>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 w-full"><div id="tracker-map" class="map-container bg-slate-200 dark:bg-slate-700 rounded-xl"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safe Route Planner -->
+    <section id="routes" class="section py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-800 dark:text-white">Safe <span class="text-primary">Route Planner</span></h2>
+                <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">Plan your journey with optimized routes that prioritize well-lit paths and safe zones.</p>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/3 bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-xl font-bold mb-6 text-slate-800 dark:text-white">Plan Your Route</h3>
+                    <div class="mb-4">
+                        <label for="start-location" class="block text-slate-700 dark:text-slate-300 mb-2">Start Location</label>
+                        <input type="text" id="start-location" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none bg-slate-100 dark:bg-slate-700" value="Current Location" disabled/>
+                    </div>
+                    <div class="mb-6">
+                        <label for="destination" class="block text-slate-700 dark:text-slate-300 mb-2">Destination</label>
+                        <input type="text" id="destination" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent" placeholder="Enter destination"/>
+                    </div>
+                    <div class="mb-6">
+                        <label for="safety-level" class="block text-slate-700 dark:text-slate-300 mb-2">Route Safety</label>
+                        <select id="safety-level" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent">
+                            <option value="safest">Safest Route (Recommended)</option>
+                            <option value="balanced">Balanced (Safety + Speed)</option>
+                            <option value="fastest">Fastest Route</option>
+                        </select>
+                    </div>
+                    <button id="plan-route" class="w-full bg-primary hover:bg-violet-700 text-white font-bold py-3 rounded-lg transition-colors"><i class="fas fa-route mr-2"></i> Plan Safe Route</button>
+                </div>
+                <div class="lg:w-2/3">
+                    <div id="route-map" class="map-container bg-slate-200 dark:bg-slate-700 rounded-xl"></div>
+                    <div id="route-info" class="mt-4 bg-white dark:bg-slate-800 p-4 rounded-lg hidden">
+                        <h3 class="font-bold text-lg mb-2 text-slate-800 dark:text-white">Route Information</h3>
+                        <p class="text-slate-600 dark:text-slate-300">Distance: <span id="route-distance">0 km</span></p>
+                        <p class="text-slate-600 dark:text-slate-300">Estimated Time: <span id="route-time">0 min</span></p>
+                        <p class="text-slate-600 dark:text-slate-300">Safety Score: <span id="safety-score">0%</span></p>
+                        <p class="text-slate-600 dark:text-slate-300">Well-lit Areas: <span id="lit-areas">0%</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Resources -->
+    <section id="resources" class="section py-20 bg-slate-50 dark:bg-slate-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-800 dark:text-white">Safety <span class="text-primary">Resources</span> & Education</h2>
+                <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">Knowledge is power. Equip yourself with essential safety information.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Resource Cards -->
+                 <div class="safety-tip bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
+                    <div class="h-40 bg-indigo-500 flex items-center justify-center"><i class="fas fa-walking text-white text-5xl"></i></div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-slate-800 dark:text-white">Walking Safety</h3>
+                        <p class="text-slate-600 dark:text-slate-300 mb-4">Essential tips for staying safe while walking alone, especially at night.</p>
+                        <a href="#" class="text-primary font-semibold">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                 <div class="safety-tip bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
+                    <div class="h-40 bg-pink-500 flex items-center justify-center"><i class="fas fa-car text-white text-5xl"></i></div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-slate-800 dark:text-white">Transport Safety</h3>
+                        <p class="text-slate-600 dark:text-slate-300 mb-4">How to stay safe when using public transportation or ride-sharing services.</p>
+                        <a href="#" class="text-primary font-semibold">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                 <div class="safety-tip bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
+                    <div class="h-40 bg-purple-500 flex items-center justify-center"><i class="fas fa-mobile-alt text-white text-5xl"></i></div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 text-slate-800 dark:text-white">Digital Safety</h3>
+                        <p class="text-slate-600 dark:text-slate-300 mb-4">Protecting your personal information and staying safe online.</p>
+                        <a href="#" class="text-primary font-semibold">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-300 py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Footer Content -->
+        </div>
+        <div class="border-t border-slate-700 mt-8 pt-8 text-center text-slate-500">
+            <p>© 2024 Guardian Angel. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- SOS Floating Button -->
+    <button id="floating-sos" class="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-red-500 text-white shadow-lg flex items-center justify-center sos-btn" aria-label="Activate Emergency SOS">
+      <i class="fas fa-bell text-xl"></i>
+    </button>
+
+    <!-- Main Application Script -->
+    <script src="script.js"></script>
+  </body>
+</html>
